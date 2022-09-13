@@ -1,5 +1,3 @@
-from ast import If
-from readline import parse_and_bind
 from sklearn.datasets import load_wine
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
