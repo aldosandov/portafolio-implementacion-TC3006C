@@ -1,5 +1,3 @@
-from ast import If
-from readline import parse_and_bind
 from sklearn.datasets import load_wine
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
@@ -16,7 +14,9 @@ def load_data():
     scaler = StandardScaler()
     X = scaler.fit_transform(X)
 
-    return X, y
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42, stratify=y)
+
+    return X_train, X_test, y_train, y_test
 
 
 def print_results(y_pred, y_test, model_obj, exec_time):
@@ -74,8 +74,11 @@ def model_training(X, y):
 
     print_results(y_pred, y_test, model, exec_time)
 
-    
+    return model
+
+
 if __name__ == "__main__" :
-    X, y = load_data()
-    model_training(X, y)
+    # Solo datos de entrenamiento para volver a particionar en train/valid.
+    X, _, y, _ = load_data()
+    model = model_training(X, y)
 
